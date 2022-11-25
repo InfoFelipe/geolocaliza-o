@@ -26,10 +26,6 @@ const Home: NextPage = () =>{
       icon:"pi pi-database"
     },
     {
-      label: "Banco de Dados",
-      icon:"pi pi-database"
-    },
-    {
       label: "Discord",
       icon:"pi pi-discord px-2"
     },
