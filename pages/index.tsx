@@ -1,7 +1,9 @@
-import type { NextPage } from "next";
+
 import {Menubar} from 'primereact/menubar'
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
+import { NextPage } from 'next';
+
 const Home: NextPage = () =>{
 
   const itens = [
