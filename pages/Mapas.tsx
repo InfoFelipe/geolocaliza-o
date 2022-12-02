@@ -1,12 +1,19 @@
 import { Container } from '@mui/material';
-import Grid from '@mui/material/Grid/Grid';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import Leaflet from "leaflet";
 import { MarkerLayer } from 'react-leaflet-marker';
+
+interface IFormDados{
+  nome: string,
+  latitude: number,
+  longitude: number,
+  quantPontos: number
+}
 
 
 const Mapeamento = () =>{
+
+  const [dados, setDados] = useState<IFormDados>();
 
   const Mapcontainer:any = () =>{
     new Mapcontainer({
@@ -18,12 +25,22 @@ const Mapeamento = () =>{
     }, []);
   }
 
+  const buscarDados = async () =>{
+    const result = await fetch ('/api/buscarDados')
+    const dados = await result.json();
+    setDados(dados);
+  }
+
+  // useEffect(() =>{
+  //   buscarDados();
+  // }, [])
+
 
   return(
     <>
 <div id='map'>
-<Container>
-<MapContainer center={[51.505, -0.09]} zoom={12} scrollWheelZoom={false} >
+<Container style={{marginTop:'10px'}}>
+<MapContainer center={[51.505, -0.09]} zoom={12} scrollWheelZoom={false}  >
   <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -38,11 +55,10 @@ const Mapeamento = () =>{
             <Marker
                 position={[55.796391, 49.108891]}
             >
-                <div>Hi, i'm a react element</div>
             </Marker>
         </MarkerLayer>
 
-  <Marker position={[51.50, -0.09]}>
+  <Marker position={[51.79, -0.09]}>
     <Popup>
       A pretty CSS3 popup. <br /> Easily customizable.
     </Popup>
