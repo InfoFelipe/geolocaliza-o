@@ -5,10 +5,9 @@ import { Button } from 'primereact/button';
 import dynamic from 'next/dynamic';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
-import { NextPage } from 'next';
 
 interface IFormInputs{
     nome: string,
@@ -24,7 +23,7 @@ const schema = yup.object({
 
 const Mapeamento = dynamic(() =>import("./Mapas"), {ssr: false});
 
-const Form: NextPage = () => {
+const Form = () => {
 
     const { register, handleSubmit, control, formState: { errors } } = useForm<IFormInputs>({
         resolver: yupResolver(schema)
@@ -49,9 +48,7 @@ const Form: NextPage = () => {
     return (
     <>
     <Container>
-    <Card 
-    style={{marginTop:'5%', padding:'auto', width:'40%', 
-    marginLeft:'30%', backgroundColor:'#2d3b45', border:'2px solid #202020'}} >
+    <Card style={{marginTop:'5%', padding:'auto', width:'40%', marginLeft:'30%', backgroundColor:'#2d3b45', border:'2px solid #202020'}} >
     <div className='container'>
     <div className='row'>
     <div className='col'>
@@ -117,8 +114,10 @@ const Form: NextPage = () => {
 
           <Mapeamento />               
     </Card>
+        
     
     </Container>
     </>
     );
 }
+export default Form
